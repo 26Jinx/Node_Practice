@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const { pathToFileURL } = require('url')
 const directory = process.argv[2]
 const fileExt = process.argv[3]
 
