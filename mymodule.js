@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const { callbackify } = require('util')
 
 // single function to read and filter files in a directory
 // three args will be passed in to the function: directory, file extension string
@@ -12,7 +13,7 @@ function readAndFilter(directory, extStr, cb) {
     // read directory
     fs.readdir(directory, function doneReading(err, contents) {
         if (err) {
-            return err
+            return cb(err)
         }
 
         for (const f of contents) {
@@ -20,6 +21,8 @@ function readAndFilter(directory, extStr, cb) {
                 results.push(f)
             }
         }
+
+        cb(null, results)
     })
 }
 
