@@ -9,13 +9,16 @@ let server = http.createServer(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'application/json' });
 
     // parse request url
-    let myUrl = new URL(request.url.toString());
-    response.end(myUrl);
+    let parsedUrl = url.parse(request.url, true);
 
     // first endpoint
-
+    if (parsedUrl.pathname.includes('parsetime')) {
+        response.end(console.log(parsedUrl.query.iso));
+    }
     // second endpoint
-    // console.log(new URL('/test?q=1', 'http://example.com'));
+    if (parsedUrl.pathname.includes('unixtime')) {
+        response.end(console.log(parsedUrl.query.iso));
+    }
 })
 
 server.listen(port);
